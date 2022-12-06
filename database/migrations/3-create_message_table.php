@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('message', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             // génère un ID auto-increment unique et no null
             $table->id();
             // contenu du message max 3000 caractères
