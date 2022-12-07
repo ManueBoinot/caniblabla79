@@ -21,9 +21,20 @@ Route::get('/', function () {
 // routes de l'authentification
 Auth::routes();
 
-// route une fois connecté
+// route vers HOME une fois connecté
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// route vers PROFIL une fois connecté
+Route::get('/user/profil/{user}', [App\Http\Controllers\UserController::class, 'profil'])->name('profil');
+// route vers COMPTE une fois connecté
+Route::get('/user/compte/{user}', [App\Http\Controllers\UserController::class, 'compte'])->name('compte');
+// route vers MODIFIER-INFOS une fois connecté
+Route::get('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'modifierInfos'])->name('modifier-infos');
+// route vers SUPPRIMER-COMPTE une fois connecté
+Route::get('/user/supprimer-compte/{user}', [App\Http\Controllers\UserController::class, 'supprimerCompte'])->name('supprimer-compte');
 
+
+// passerelles entre utilisateur et controllers
 Route::resource('/message', App\Http\Controllers\MessageController::class)->except(['index', 'show']);
 Route::resource('/commentaire', App\Http\Controllers\CommentaireController::class)->except(['index', 'show']);
 Route::resource('/user', App\Http\Controllers\UserController::class)->except(['index', 'create', 'store']);
+
