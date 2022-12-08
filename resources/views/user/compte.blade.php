@@ -42,6 +42,7 @@
         <div class="row mx-auto">
             <div class="col d-flex justify-content-between m-2 px-5">
                 <a href="{{ route('modifier-infos', Auth::user())}}"><button class="btn btn-lg btn-primary">Modifier mes informations</button></a>
+                <a href="{{ route('modifier-password', Auth::user())}}"><button class="btn btn-lg btn-primary">Modifier mon mot de passe</button></a>
                 <a href="{{ route('supprimer-compte', Auth::user())}}"><button class="btn btn btn-danger">Supprimer mon compte</button></a>
             </div>
         </div>

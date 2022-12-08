@@ -21,7 +21,7 @@ class MessageController extends Controller
         $request->validate([
             'contenu' => 'required|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
-            'image' => 'image|nullable',
+            'image' => 'image|nullable'
         ]);
 
         $user = Auth::user(); // on récupère l'id de l'utilisateur connecté

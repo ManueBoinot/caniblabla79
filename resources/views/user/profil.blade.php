@@ -8,6 +8,6 @@ Profil
 
 @section('content')
 {{-- écrire ici le code de cette page --}}
-<h1>Profil de {{$user->pseudo}}</h1>
+<h1 class="text-center">Profil de {{$user->pseudo}}</h1>
 
 @endsection

@@ -16,42 +16,40 @@
                     <h2 class="mb-5 text-center">MODIFIER MES INFORMATIONS</h2>
                 </div>
                 <div class="row mb-3">
-                    <form action="{{ 'modifier-infos' }}" method="POST">
+                    <form action="{{ route('user.update', Auth::user()) }}" method="POST">
+                        @method('put') @csrf
                         <div class="col">
                             <label for="inputNom" class="form-label fw-bold fs-5">Nouveau nom</label>
-                            <input type="text" class="form-control" id="inputNom" area-describedby="nomHelp">
+                            <input name="nom" type="text" class="form-control" id="inputNom" area-describedby="nomHelp"
+                                value='{{ $user->nom }}'>
                             <div id="nomHelp" class="form-text">Nom actuel : {{ $user->nom }} </div>
                         </div>
                         <div class="col">
                             <label for="inputPrenom" class="form-label fw-bold fs-5">Nouveau prénom</label>
-                            <input type="text" class="form-control" id="inputPrenom" area-describedby="prenomHelp">
+                            <input name="prenom" type="text" class="form-control" id="inputPrenom" area-describedby="prenomHelp"
+                                value='{{ $user->prenom }}'>
                             <div id="prenomHelp" class="form-text">Prénom actuel : {{ $user->prenom }}
                             </div>
                         </div>
                         <div class="col">
                             <label for="inputPseudo" class="form-label fw-bold fs-5">Nouveau pseudo</label>
-                            <input type="text" class="form-control" id="inputPseudo" area-describedby="pseudoHelp">
+                            <input name="pseudo" type="text" class="form-control" id="inputPseudo" area-describedby="pseudoHelp"
+                                value='{{ $user->pseudo }}'>
                             <div id="pseudoHelp" class="form-text">Pseudo actuel : {{ $user->pseudo }}
                             </div>
                         </div>
                         <div class="col">
                             <label for="inputEmail" class="form-label fw-bold fs-5">Nouvelle adresse email</label>
-                            <input type="email" class="form-control" id="inputEmail" area-describedby="emailHelp">
+                            <input name="email" type="email" class="form-control" id="inputEmail" area-describedby="emailHelp"
+                                value="{{ $user->email }}">
                             <div id="emailHelp" class="form-text">Email actuel : {{ $user->email }}
                             </div>
                         </div>
+                        <button class="btn btn-lg btn-primary" type="submit"
+                            action="{{ route('user.update', Auth::user()) }}">Modifier mes
+                            informations</button>
                     </form>
                 </div>
-                <div class="row mx-auto">
-                    <div class="col d-flex justify-content-between m-2 px-5">
-                        <a href="{{ route('modifier-infos', Auth::user()) }}"><button
-                                class="btn btn-lg btn-primary">Modifier mes
-                                informations</button></a>
-                        <a href="{{ route('supprimer-compte', Auth::user()) }}"><button class="btn btn btn-danger">Supprimer
-                                mon
-                                compte</button></a>
-                    </div>
-
-                </div>
+            </div>
     </section>
 @endsection

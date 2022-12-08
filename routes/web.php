@@ -27,8 +27,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/user/profil/{user}', [App\Http\Controllers\UserController::class, 'profil'])->name('profil');
 // route vers COMPTE une fois connecté
 Route::get('/user/compte/{user}', [App\Http\Controllers\UserController::class, 'compte'])->name('compte');
-// route vers MODIFIER-INFOS une fois connecté
+// route vers le formulaire MODIFIER-INFOS une fois connecté
 Route::get('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'modifierInfos'])->name('modifier-infos');
+// route vers le formulaire MODIFIER-PASSWORD une fois connecté
+Route::get('/user/modifier-password/{user}', [App\Http\Controllers\UserController::class, 'modifierPassword'])->name('modifier-password');
+// exécution de UPDATE-PASSWORD une fois connecté
+Route::POST('/user/modifier-password/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
 // route vers SUPPRIMER-COMPTE une fois connecté
 Route::get('/user/supprimer-compte/{user}', [App\Http\Controllers\UserController::class, 'supprimerCompte'])->name('supprimer-compte');
 
