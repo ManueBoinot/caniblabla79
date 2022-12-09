@@ -61,17 +61,17 @@ class UserController extends Controller
     }
 
     
-        /**
-     * Affiche la page MODIFIER-PASSWORD
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function modifierPassword(User $user)
-    {
-        return view('user.update-password', ['user' => $user]);
-    }
+    //     /**
+    //  * Affiche la page MODIFIER-PASSWORD
+    //  *
+    //  * @param  int  $id
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function modifierPassword(User $user)
+    // {
+    //     return view('user.update-infos', ['user' => $user]);
+    // }
 
     
     /**
@@ -117,7 +117,7 @@ class UserController extends Controller
 
 
     /**
-     * Met à jour lE PASSWORD
+     * Met à jour le PASSWORD
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -125,28 +125,31 @@ class UserController extends Controller
      */
     public function updatePassword(Request $request, User $user)
     {
-                $request->validate(['password1' => 'required', 'password2' => 'min:8|required|string', 'password3' => 'min:8|required|string']);
+        $this->validate($request, [ 
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+ 
+        $hashedPassword = $user->password;
+        if (\Hash::check($request->old_password, $hashedPassword)) {
+            if (!\Hash::check($request->new_password, $hashedPassword)) {
 
-                if ($request->input('password1') !== $user->password) 
-                {
-                    return \redirect()->route('modifier-password', ['user'=>$user])->with('message', 'Le mot de passe actuel ne correspond pas') ;
-                }   
-                elseif ($request->input('password2') == $user->password) 
-                {
-                    return \redirect()->route('modifier-password', ['user'=>$user])->with('message', 'Merci de choisir un mot de passe différent de celui actuellement utilisé') ;
-                }   
-                elseif ($request->input('password2') !== $request->input('password3')) 
-                {
-                    return \redirect()->route('modifier-password', ['user'=>$user])->with('message', 'Les mots de passe ne correspondent pas') ;
-                } 
-               
-                $user->id = $user->id;
-                $user->password = $request->input('password3');
-        
+                $user->password = \Hash::make($request->new_password);
                 $user->save();
-        
-                return \redirect()->route('profil', ['user'=>$user])->with('message', 'Le mot de passe a bien été modifié');
+                session()->flash('message','Le mot de passe a bien été modifié');
+                return redirect()->back();
+            }
+            else{
+                session()->flash('message','Le nouveau mot de passe doit être différent de l\'ancien');
+                return redirect()->back();
+            } 
+        }
+        else{
+            session()->flash('message','L\'ancien mot de passe est incorrect');
+            return redirect()->back();
+        }
     }
+
 
 
     /**
