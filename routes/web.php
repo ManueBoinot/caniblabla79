@@ -21,19 +21,19 @@ Route::get('/', function () {
 // routes de l'authentification
 Auth::routes();
 
-// route vers HOME une fois connecté
+// route vers HOME si connecté
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// route vers PROFIL une fois connecté
+// route vers PROFIL si connecté
 Route::get('/user/profil/{user}', [App\Http\Controllers\UserController::class, 'profil'])->name('profil');
-// route vers COMPTE une fois connecté
+// route vers COMPTE
 Route::get('/user/compte/{user}', [App\Http\Controllers\UserController::class, 'compte'])->name('compte');
-// route vers le formulaire MODIFIER-INFOS une fois connecté
+// route vers le formulaire MODIFIER-INFOS
 Route::get('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'modifierInfos'])->name('modifier-infos');
-// // route vers le formulaire MODIFIER-PASSWORD une fois connecté
-// Route::get('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'modifierPassword'])->name('modifier-password');
-// exécution de UPDATE-PASSWORD une fois connecté
+// exécution de UPDATE-PASSWORD
 Route::POST('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
-// route vers SUPPRIMER-COMPTE une fois connecté
+// exécution de CREATE MESSAGE
+Route::POST('/message/create/{user}', [App\Http\Controllers\MessageController::class, 'createMessage'])->name('createMessage');
+// route vers SUPPRIMER-COMPTE 
 Route::get('/user/supprimer-compte/{user}', [App\Http\Controllers\UserController::class, 'supprimerCompte'])->name('supprimer-compte');
 
 

@@ -4,9 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
+
+        /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function validator(array $data)
+    {
+        return Validator::make($data, [
+            'contenu' => ['required', 'string', 'max:1000'],
+            'image' => ['string', 'max:255'],
+            'tags' => ['string'],
+        ]);
+    }
+
+    
+        /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\Models\Message
+     */
+    public function createMessage(array $data)
+    {
+        $user = Auth::user();
+
+        return Message::create([
+            'contenu' => $data['contenu'],
+            'user_id' => $user->id,
+            'image' => $data['image'],
+            'tags' => $data['tags'],
+        ]);
+    }
 
 
     /**
@@ -18,6 +53,7 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         // validateur qui vérifie les champs
+
         $request->validate([
             'contenu' => 'required|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
@@ -40,6 +76,7 @@ class MessageController extends Controller
         return \redirect()->route('home')->with('message', 'le message a bien été sauvegardé');
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -50,6 +87,7 @@ class MessageController extends Controller
     {
         //
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -63,6 +101,7 @@ class MessageController extends Controller
         // validateur qui vérifie les champs
         // modification du message en base de données
     }
+
 
     /**
      * Remove the specified resource from storage.

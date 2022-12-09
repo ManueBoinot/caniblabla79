@@ -20,8 +20,8 @@
                     <form action="{{ route('user.update', Auth::user()) }}" method="POST">
                         @method('put') @csrf
                         <div class="col">
-                            <label class="form-label fw-bold fs-5">Nouveau nom</label>
-                            <input name="nom" type="text" class="form-control" value='{{ $user->nom }}'>
+                            <label for="inputNom" class="form-label fw-bold fs-5">Nouveau nom</label>
+                            <input name="nom" type="text" class="form-control" id="inputNom" value='{{ $user->nom }}'>
                         </div>
                         <div class="col">
                             <label for="inputPrenom" class="form-label fw-bold fs-5">Nouveau prénom</label>

@@ -109,6 +109,7 @@
 
         <main class="py-4">
             {{-- on injecte le code de chaque page du site --}}
+            @yield('title')
             @yield('content')
 
         </main>

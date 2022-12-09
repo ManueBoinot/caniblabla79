@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
+
 class HomeController extends Controller
 {
     /**
@@ -21,7 +23,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // (non utilisé) on récupère tous les messages
+        // $message = Message::all();
+
+        // on récupère tous les messages ET leur auteur
+        $message = Message::with('user', 'commentaire')->get();
+
+        // on affiche les messages sur HOME ['variable dans la view', $variable de la fonction]
+        return view('home', ['message' => $message]);
     }
 
 }

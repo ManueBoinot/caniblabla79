@@ -61,19 +61,6 @@ class UserController extends Controller
     }
 
     
-    //     /**
-    //  * Affiche la page MODIFIER-PASSWORD
-    //  *
-    //  * @param  int  $id
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function modifierPassword(User $user)
-    // {
-    //     return view('user.update-infos', ['user' => $user]);
-    // }
-
-    
     /**
      * Affiche la page SUPPRIMER-COMPTE
      *
