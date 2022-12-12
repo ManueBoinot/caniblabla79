@@ -12,7 +12,10 @@
     <title>@yield('title')</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -87,9 +90,9 @@
                                     {{-- lien vers le user compte --}}
                                     <a class="dropdown-item" href="{{ route('compte', $user = Auth::user()) }}">
                                         Mon compte
-                                    </a>                                    
+                                    </a>
 
-                                    {{-- lien pour se déconnecter--}}
+                                    {{-- lien pour se déconnecter --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -108,6 +111,7 @@
         </nav>
 
         <main class="py-4">
+            
             {{-- on injecte le code de chaque page du site --}}
             @yield('title')
             @yield('content')

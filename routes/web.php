@@ -31,14 +31,14 @@ Route::get('/user/compte/{user}', [App\Http\Controllers\UserController::class, '
 Route::get('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'modifierInfos'])->name('modifier-infos');
 // exécution de UPDATE-PASSWORD
 Route::POST('/user/modifier-infos/{user}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('updatePassword');
-// exécution de CREATE MESSAGE
-Route::POST('/message/create/{user}', [App\Http\Controllers\MessageController::class, 'createMessage'])->name('createMessage');
 // route vers SUPPRIMER-COMPTE 
 Route::get('/user/supprimer-compte/{user}', [App\Http\Controllers\UserController::class, 'supprimerCompte'])->name('supprimer-compte');
+// exécution de UPDATE-MESSAGE
+Route::PATCH('/message/update/{message}', [App\Http\Controllers\MessageController::class, 'update'])->name('message.update');
 
 
 // passerelles entre utilisateur et controllers
-Route::resource('/message', App\Http\Controllers\MessageController::class)->except(['index', 'show']);
-Route::resource('/commentaire', App\Http\Controllers\CommentaireController::class)->except(['index', 'show']);
 Route::resource('/user', App\Http\Controllers\UserController::class)->except(['index', 'create', 'store']);
+Route::resource('/message', App\Http\Controllers\MessageController::class)->except(['index', 'show', 'update']);
+Route::resource('/commentaire', App\Http\Controllers\CommentaireController::class)->except(['index', 'show']);
 
