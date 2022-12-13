@@ -26,11 +26,13 @@ class HomeController extends Controller
         // (non utilisé) on récupère tous les messages
         // $message = Message::all();
 
-        // on récupère tous les messages ET leur auteur
-        $messages = Message::with('user', 'commentaires')->latest()->paginate(5);
+        // on récupère tous les messages ET leur auteur ET les commentaires liés
+        $messages = Message::with(['user', 'commentaires' => function ($query) {
+            $query->latest();
+        }])->latest()->paginate(10);
+
 
         // on affiche les messages sur HOME ['variable dans la view', $variable de la fonction]
         return view('home', ['messages' => $messages]);
     }
-
 }

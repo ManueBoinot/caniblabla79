@@ -19,11 +19,11 @@ return new class extends Migration
             // contenu du message max 3000 caractères
             $table->text("contenu", 3000);
             // clé étrangère vers table USERS
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete();
             // image associée message
-            $table->string("image");
+            $table->string("image")->nullable();
             // tags de l'image
-            $table->string("tags", 50);
+            $table->string("tags", 50)->nullable();
             // champs created_at et updated_at
             $table->timestamps();
         });

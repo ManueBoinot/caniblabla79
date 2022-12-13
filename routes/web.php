@@ -35,10 +35,12 @@ Route::POST('/user/modifier-infos/{user}', [App\Http\Controllers\UserController:
 Route::get('/user/supprimer-compte/{user}', [App\Http\Controllers\UserController::class, 'supprimerCompte'])->name('supprimer-compte');
 // exécution de UPDATE-MESSAGE
 Route::PATCH('/message/update/{message}', [App\Http\Controllers\MessageController::class, 'update'])->name('message.update');
+// exécution de UPDATE-COMMENTAIRE
+Route::PATCH('/commentaire/update/{commentaire}', [App\Http\Controllers\CommentaireController::class, 'update'])->name('commentaire.update');
 
 
 // passerelles entre utilisateur et controllers
 Route::resource('/user', App\Http\Controllers\UserController::class)->except(['index', 'create', 'store']);
 Route::resource('/message', App\Http\Controllers\MessageController::class)->except(['index', 'show', 'update']);
-Route::resource('/commentaire', App\Http\Controllers\CommentaireController::class)->except(['index', 'show']);
+Route::resource('/commentaire', App\Http\Controllers\CommentaireController::class)->except(['index', 'show', 'update']);
 

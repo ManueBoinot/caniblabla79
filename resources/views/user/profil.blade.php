@@ -3,11 +3,10 @@
 
 {{-- inclusion dynamique du titre --}}
 @section('title')
-Profil
+<h1 class="text-center text-uppercase text-info">PROFIL PUBLIC DE {{$user->pseudo}}</h1>
 @endsection
 
 @section('content')
-{{-- écrire ici le code de cette page --}}
-<h1 class="text-center">Profil de {{$user->pseudo}}</h1>
+
 
 @endsection

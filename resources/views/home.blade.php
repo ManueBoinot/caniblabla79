@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    <h1 class="text-center text-uppercase text-info">ACCUEIL</h1>
+@endsection
+
 @section('content')
     <section>
         <div class="container bg-light">
@@ -17,6 +21,11 @@
                 @endforeach
             </div>
 
+
+            <div class="d-flex justify-content-center">
+                {{ $messages->links() }}
+            </div>
+            
         </div>
     </section>
 @endsection

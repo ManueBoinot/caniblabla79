@@ -3,7 +3,7 @@
 
 {{-- inclusion dynamique du titre --}}
 @section('title')
-    compte personnel
+    <h1 class="text-center text-uppercase text-info">ESPACE PERSONNEL</h1>
 @endsection
 
 @section('content')

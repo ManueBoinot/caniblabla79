@@ -42,7 +42,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand fs-1" href="{{ url('/') }}">
+                <a class="navbar-brand fs-1" href="{{ url('/home') }}">
                     {{ config('CANIBLABLA 79', 'CANIBLABLA 79') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

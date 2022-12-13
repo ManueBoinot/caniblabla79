@@ -17,12 +17,12 @@
         </div>
 
         <!-- MODIFIER MON COMMENTAIRE-->
-        <div class="row mx-auto bg-warning border rounded m-5 p-5">
+        <div class="row mx-auto bg-danger border rounded m-5 p-5">
             <div class="row">
                 <h2 class="text-center text-uppercase">Modifier mon commentaire</h2>
             </div>
             <div class="row">
-                <form action="{{ route('message.update', $commentaire) }}" method="POST">
+                <form action="{{ route('commentaire.update', $commentaire) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="row text-center mx-auto mt-4">
@@ -36,11 +36,11 @@
                     </div>
                     <div class="row text-center mx-auto mt-4">
                         <label for="tags" class="form-label fw-bold fs-5">Tags (facultatif)</label>
-                        <input name="tags" type="text" class="form-control"
-                            id="tags"value="{{ $commentaire->tags }}">
+                        <input name="tags" type="text" class="form-control" id="tags"
+                            value="{{ $commentaire->tags }}">
                     </div>
                     <div class="row text-center mx-auto mt-4">
-                        <button class="btn btn-lg btn-info mx-auto" type="submit">Valider la modification</button>
+                        <button class="btn btn-lg btn-warning mx-auto" type="submit">Valider la modification</button>
                     </div>
                 </form>
             </div>

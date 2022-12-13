@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('commentaires', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("message_id")->constrained();
+            $table->foreignId("message_id")->constrained()->cascadeOnDelete();
             $table->text("contenu", 3000);
-            $table->string("image");
-            $table->foreignId("user_id")->constrained();
-            $table->string("tags", 50);
+            $table->string("image")->nullable();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+            $table->string("tags", 50)->nullable();
             $table->timestamps();
         });
     }

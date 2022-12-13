@@ -4,19 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Commentaire;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentaireController extends Controller
 {
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,15 +25,14 @@ class CommentaireController extends Controller
             'image' => 'image|nullable',
         ]);
 
-        $user = Auth::user(); // on récupère l'id de l'utilisateur connecté
-
         $commentaire = new Commentaire;
 
         //j'accède aux propriétés de mon message et je leur donne des valeurs
-        $commentaire->user_id = $user->id;
+        $commentaire->user_id = Auth::user()->id;
+        $commentaire->message_id = $request->input('message_id');
         $commentaire->contenu = $request->input('contenu');
         $commentaire->image = isset($request['image']) ? $request['image'] : null;
-        $commentaire->tags = $request->input('tags');
+        $commentaire->tags = isset($request['tags']) ? $request['tags'] : null;
 
         // création du message en base de données
         $commentaire->save();
@@ -56,10 +47,11 @@ class CommentaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Commentaire $commentaire)
     {
-        //
+        return \view('commentaire.modif-commentaire', ['commentaire' => $commentaire]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -68,9 +60,22 @@ class CommentaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Commentaire $commentaire)
     {
-        //
+
+        $request->validate([
+            'contenu' => 'nullable|min:5|max:500',
+            'tags' => 'nullable|min:3|max:50',
+            'image' => 'image|nullable'
+        ]);
+
+        $commentaire->contenu = isset($request['contenu']) ? $request['contenu'] : null;
+        $commentaire->image = isset($request['image']) ? $request['image'] : null;
+        $commentaire->tags = isset ($request['tags']) ? $request['tags'] : null;
+
+        $commentaire->save();
+
+        return redirect()->route('home')->with('message', 'le commentaire a bien été modifié');
     }
 
     /**
@@ -79,8 +84,10 @@ class CommentaireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Commentaire $commentaire)
     {
-        //
+        $commentaire->delete();
+
+        return redirect()->route('home')->with('message', 'Votre commentaire a bien été supprimé');
     }
 }

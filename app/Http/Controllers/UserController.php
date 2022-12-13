@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 
@@ -118,10 +119,10 @@ class UserController extends Controller
         ]);
  
         $hashedPassword = $user->password;
-        if (\Hash::check($request->old_password, $hashedPassword)) {
-            if (!\Hash::check($request->new_password, $hashedPassword)) {
+        if (Hash::check($request->old_password, $hashedPassword)) {
+            if (Hash::check($request->new_password, $hashedPassword)) {
 
-                $user->password = \Hash::make($request->new_password);
+                $user->password = Hash::make($request->new_password);
                 $user->save();
                 session()->flash('message','Le mot de passe a bien été modifié');
                 return redirect()->back();
@@ -161,6 +162,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('home')->with('message', 'Votre compte a bien été supprimé');
+        return redirect()->route('home')->with('flash', 'Votre compte a bien été supprimé');
     }
 }
