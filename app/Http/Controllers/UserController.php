@@ -9,18 +9,8 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 
 {
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-
+// *************************************************************************************************
     /**
      * Affiche la page PROFIL
      *
@@ -34,7 +24,7 @@ class UserController extends Controller
         return view('user.profil', ['user' => $user]);
     }
 
-
+// *************************************************************************************************
     /**
      * Affiche la page COMPTE
      *
@@ -48,7 +38,7 @@ class UserController extends Controller
         return view('user.compte', ['user' => $user]);
     }
 
-
+// *************************************************************************************************
     /**
      * Affiche la page MODIFIER-INFOS
      *
@@ -61,7 +51,7 @@ class UserController extends Controller
         return view('user.update-infos', ['user' => $user]);
     }
 
-    
+// *************************************************************************************************   
     /**
      * Affiche la page SUPPRIMER-COMPTE
      *
@@ -75,7 +65,7 @@ class UserController extends Controller
         return view('user.supprimer-compte', ['user' => $user]);
     }
 
-
+// *************************************************************************************************
     /**
      * Met à jour les INFOS USER
      *
@@ -89,7 +79,8 @@ class UserController extends Controller
                     'nom' => 'required|string|min:2|max:50',
                     'prenom' => 'required|string|min:2|max:50',
                     'pseudo' => 'required|string|min:2|max:50',
-                    'email' => 'required|string|email|min:9|max:50'
+                    'email' => 'required|string|email|min:9|max:50',
+                    'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
                 ]);
                
                 $user->id = $user->id;
@@ -97,13 +88,14 @@ class UserController extends Controller
                 $user->prenom = $request->input('prenom');
                 $user->pseudo = $request->input('pseudo');
                 $user->email = $request->input('email');
+                $user->image = isset($request['image']) ? uploadImage($request['image']) : "default_user.jpg";
         
                 $user->save();
         
                 return \redirect()->route('profil', ['user'=>$user])->with('message', 'Les modifications ont bien été appliquées');
     }
 
-
+// *************************************************************************************************
     /**
      * Met à jour le PASSWORD
      *
@@ -138,20 +130,7 @@ class UserController extends Controller
         }
     }
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-
+// *************************************************************************************************
     /**
      * Remove the specified resource from storage.
      *
@@ -164,4 +143,7 @@ class UserController extends Controller
 
         return redirect()->route('home')->with('flash', 'Votre compte a bien été supprimé');
     }
+
+// *************************************************************************************************  
+
 }

@@ -22,7 +22,7 @@ class CommentaireController extends Controller
         $request->validate([
             'contenu' => 'required|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
-            'image' => 'image|nullable',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ]);
 
         $commentaire = new Commentaire;
@@ -31,7 +31,7 @@ class CommentaireController extends Controller
         $commentaire->user_id = Auth::user()->id;
         $commentaire->message_id = $request->input('message_id');
         $commentaire->contenu = $request->input('contenu');
-        $commentaire->image = isset($request['image']) ? $request['image'] : null;
+        $commentaire->image = isset($request['image']) ? uploadImage($request['image']) : "default_user.jpg";
         $commentaire->tags = isset($request['tags']) ? $request['tags'] : null;
 
         // création du message en base de données
@@ -40,7 +40,7 @@ class CommentaireController extends Controller
         return \redirect()->route('home')->with('message', 'le commentaire a bien été sauvegardé');
     }
 
-
+// *************************************************************************************************
     /**
      * Show the form for editing the specified resource.
      *
@@ -52,7 +52,7 @@ class CommentaireController extends Controller
         return \view('commentaire.modif-commentaire', ['commentaire' => $commentaire]);
     }
 
-
+// *************************************************************************************************
     /**
      * Update the specified resource in storage.
      *
@@ -66,11 +66,11 @@ class CommentaireController extends Controller
         $request->validate([
             'contenu' => 'nullable|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
-            'image' => 'image|nullable'
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ]);
 
         $commentaire->contenu = isset($request['contenu']) ? $request['contenu'] : null;
-        $commentaire->image = isset($request['image']) ? $request['image'] : null;
+        $commentaire->image = isset($request['image']) ? uploadImage($request['image']) : "default_user.jpg";
         $commentaire->tags = isset ($request['tags']) ? $request['tags'] : null;
 
         $commentaire->save();
@@ -78,6 +78,7 @@ class CommentaireController extends Controller
         return redirect()->route('home')->with('message', 'le commentaire a bien été modifié');
     }
 
+// *************************************************************************************************
     /**
      * Remove the specified resource from storage.
      *
@@ -90,4 +91,6 @@ class CommentaireController extends Controller
 
         return redirect()->route('home')->with('message', 'Votre commentaire a bien été supprimé');
     }
+
+// *************************************************************************************************
 }

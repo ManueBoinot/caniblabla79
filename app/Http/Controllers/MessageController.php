@@ -22,7 +22,7 @@ class MessageController extends Controller
         $request->validate([
             'contenu' => 'required|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
-            'image' => 'image|nullable'
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ]);
 
         $user = Auth::user(); // on récupère l'id de l'utilisateur connecté
@@ -32,7 +32,7 @@ class MessageController extends Controller
         //j'accède aux propriétés de mon message et je leur donne des valeurs
         $message->user_id = $user->id;
         $message->contenu = $request->input('contenu');
-        $message->image = isset($request['image']) ? $request['image'] : null;
+        $message->image = isset($request['image']) ? uploadImage($request['image']) : "default_user.jpg";
         $message->tags = isset($request['tags']) ? $request['tags'] : null;
 
         // création du message en base de données
@@ -41,7 +41,7 @@ class MessageController extends Controller
         return \redirect()->route('home')->with('message', 'le message a bien été sauvegardé');
     }
 
-
+    // *************************************************************************************************
     /**
      * Show the form for editing the specified resource.
      *
@@ -53,7 +53,7 @@ class MessageController extends Controller
         return \view('message.modif-message', ['message' => $message]);
     }
 
-
+    // *************************************************************************************************
     /**
      * Update the specified resource in storage.
      *
@@ -67,19 +67,19 @@ class MessageController extends Controller
         $request->validate([
             'contenu' => 'nullable|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
-            'image' => 'image|nullable'
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048'
         ]);
 
         $message->contenu = isset($request['contenu']) ? $request['contenu'] : null;
-        $message->image = isset($request['image']) ? $request['image'] : null;
-        $message->tags = isset ($request['tags']) ? $request['tags'] : null;
+        $message->image = isset($request['image']) ? uploadImage($request['image']) : "default_user.jpg";
+        $message->tags = isset($request['tags']) ? $request['tags'] : null;
 
         $message->save();
 
         return redirect()->route('home')->with('message', 'le message a bien été modifié');
     }
 
-
+    // *************************************************************************************************
     /**
      * Remove the specified resource from storage.
      *
@@ -91,5 +91,22 @@ class MessageController extends Controller
         $message->delete();
 
         return redirect()->route('home')->with('message', 'Votre message a bien été supprimé');
+    }
+
+    // *************************************************************************************************
+
+    function index(Request $request)
+    {
+        $messages = Message::where([
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
+                    $query->orWhere('contenu', 'LIKE', '%' . $search . '%')
+                        ->orWhere('tags', 'LIKE', '%' . $search . '%')
+                        ->get();
+                }
+            }]
+        ])->paginate(5);
+
+        return view('message.messages-recherche', compact('messages'));
     }
 }

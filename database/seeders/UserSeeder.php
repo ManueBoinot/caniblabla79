@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'pseudo' => 'admin',
             'nom' => 'admin',
             'prenom' => 'admin',
-            'image' => 'admin.jpg',
+            'image' => 'avatar.jpg',
             'email' => 'admin@admin.fr',
             'email_verified_at' => now(),
             'password' => Hash::make("admin123456"),

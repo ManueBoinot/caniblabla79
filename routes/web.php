@@ -37,6 +37,8 @@ Route::get('/user/supprimer-compte/{user}', [App\Http\Controllers\UserController
 Route::PATCH('/message/update/{message}', [App\Http\Controllers\MessageController::class, 'update'])->name('message.update');
 // exécution de UPDATE-COMMENTAIRE
 Route::PATCH('/commentaire/update/{commentaire}', [App\Http\Controllers\CommentaireController::class, 'update'])->name('commentaire.update');
+// exécution de RECHERCHE MESSAGES
+Route::get('/user/messages-recherche', [App\Http\Controllers\MessageController::class,'index'])->name('messages-recherche');
 
 
 // passerelles entre utilisateur et controllers

@@ -7,7 +7,7 @@
             </div>
 
             <div class="row mx-auto">
-                <form action="{{ route('message.store') }}" method="POST">
+                <form action="{{ route('message.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <label for="contenu" class="form-label fs-5">Corps du message</label>

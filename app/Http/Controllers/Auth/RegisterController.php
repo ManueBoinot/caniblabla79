@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'pseudo' => ['required', 'string'],
-            'image' => ['string', 'max:255', 'nullable'],
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'nom' => $data['nom'],
             'prenom' => $data['prenom'],
             'pseudo' => $data['pseudo'],
-            'image' => $data['image'],
+            'image' => isset($data['image']) ? uploadImage($data['image']) : "default_user.jpg",
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

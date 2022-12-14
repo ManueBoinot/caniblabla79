@@ -8,7 +8,7 @@
             <div class="card w-75 mx-auto p-4 text-center bg-white" style="width: 18rem;">
                 <h2 class="m-2 mb-3">Commentaire actuel</h2>
                 <h5 class="card-title m-2">{{ $commentaire['tags'] }}</h5>
-                <img src="{{ $commentaire['image'] }}" class="card-img-top" alt="image">
+                <img src="/images/{{ $commentaire->image }}" class="card-img-top mx-auto" style="object-fit:contain; max-width: 300px; max-height: 300px;" alt="image">
                 <div class="card-body p-2 mx-auto">
                     <p class="card-text">{{ $commentaire['auteur'] }}<br>
                         {{ $commentaire['contenu'] }}</p>
@@ -22,7 +22,7 @@
                 <h2 class="text-center text-uppercase">Modifier mon commentaire</h2>
             </div>
             <div class="row">
-                <form action="{{ route('commentaire.update', $commentaire) }}" method="POST">
+                <form action="{{ route('commentaire.update', $commentaire) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="row text-center mx-auto mt-4">

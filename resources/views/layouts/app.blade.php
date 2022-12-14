@@ -53,12 +53,16 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+                    <ul class="navbar-nav mx-auto">
+                        <form action="{{ route('messages-recherche')}}" method="GET" class="d-flex" role="search" style="min-width: 350px">
+                            <input class="form-control me-2" type="search" name="search" placeholder="Rechercher dans les messages..." aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Chercher</button>
+                          </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        
                         <!-- Affichage navbar pour les invités non connectés -->
                         @guest
                             @if (Route::has('login'))

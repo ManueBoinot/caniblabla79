@@ -17,7 +17,7 @@
                     <h2 class="mb-5 text-center">MODIFIER MES INFORMATIONS</h2>
                 </div>
                 <div class="row mb-3">
-                    <form action="{{ route('user.update', Auth::user()) }}" method="POST">
+                    <form action="{{ route('user.update', Auth::user()) }}" method="POST" enctype="multipart/form-data">
                         @method('put') @csrf
                         <div class="col">
                             <label for="inputNom" class="form-label fw-bold fs-5">Nouveau nom</label>

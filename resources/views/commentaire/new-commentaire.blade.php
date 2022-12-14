@@ -1,18 +1,18 @@
 <!-- FORMULAIRE NOUVEAU COMMENTAIRE -->
 <!-- dans un accordéon-->
-<div class="accordion accordion-flush m-2" id="accordionFlushExample">
+<div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
         <h2 class="accordion-header bg-warning" id="flush-headingOne">
-            <button class="accordion-button collapsed bg-info text-white fw-bold mx-auto" style="width: fit-content;" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            <button class="accordion-button collapsed bg-info text-white fw-bold mx-auto mt-5" style="width: fit-content;" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne{{ $message->id }}" aria-expanded="false" aria-controls="flush-collapseOne">
                 Écrire un commentaire...
             </button>
         </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+        <div id="flush-collapseOne{{ $message->id }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
             data-bs-parent="#accordionFlushExample">
             <div class="accordion-body bg-info">
 
-                <form action="{{ route('commentaire.store') }}" method="POST">
+                <form action="{{ route('commentaire.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <input name="message_id" type="hidden" class="form-control" id="message_id"

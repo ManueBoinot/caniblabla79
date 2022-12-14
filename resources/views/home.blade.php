@@ -5,27 +5,25 @@
 @endsection
 
 @section('content')
-    <section>
-        <div class="container bg-light">
+    <section class="container">
 
-            {{-- POSTER UN MESSAGE --}}
-            <div class="row mx-auto">
-                @include('message.new-message')
-            </div>
+        {{-- POSTER UN MESSAGE --}}
+        <section class="mx-auto bg-light">
+            @include('message.new-message')
+        </section>
 
-            {{-- TOUS LES MESSAGES --}}
-            <div class="row mx-auto mt-5">
-                <h1 class="text-center">DERNIERS MESSAGES</h1>
-                @foreach ($messages as $message)
-                    @include('message.message')
-                @endforeach
-            </div>
+        {{-- TOUS LES MESSAGES --}}
+        <section class="mx-auto bg-light">
+            <h2 class="text-center p-3">DERNIERS MESSAGES</h2>
+            @foreach ($messages as $message)
+                @include('message.message')
+            @endforeach
 
-
+            {{-- PAGINATION DES MESSAGES --}}
             <div class="d-flex justify-content-center">
                 {{ $messages->links() }}
             </div>
-            
-        </div>
+        </section>
+
     </section>
 @endsection
