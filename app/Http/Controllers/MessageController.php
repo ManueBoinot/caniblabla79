@@ -38,7 +38,7 @@ class MessageController extends Controller
         // création du message en base de données
         $message->save();
 
-        return \redirect()->route('home')->with('message', 'le message a bien été sauvegardé');
+        return \redirect()->route('home')->with('message', 'Le message a bien été publié');
     }
 
     // *************************************************************************************************
@@ -76,7 +76,7 @@ class MessageController extends Controller
 
         $message->save();
 
-        return redirect()->route('home')->with('message', 'le message a bien été modifié');
+        return redirect()->route('home')->with('message', 'Le message a bien été modifié');
     }
 
     // *************************************************************************************************
@@ -90,7 +90,7 @@ class MessageController extends Controller
     {
         $message->delete();
 
-        return redirect()->route('home')->with('message', 'Votre message a bien été supprimé');
+        return redirect()->route('home')->with('message', 'Le message a bien été supprimé');
     }
 
     // *************************************************************************************************

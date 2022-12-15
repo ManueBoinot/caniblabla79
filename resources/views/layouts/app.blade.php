@@ -40,9 +40,9 @@
         @endif
     </div>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning shadow-sm">
             <div class="container">
-                <a class="navbar-brand fs-1" href="{{ url('/home') }}">
+                <a class="navbar-brand fs-1 text-white" href="{{ url('/home') }}">
                     {{ config('CANIBLABLA 79', 'CANIBLABLA 79') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -54,15 +54,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mx-auto">
-                        <form action="{{ route('messages-recherche')}}" method="GET" class="d-flex" role="search" style="min-width: 350px">
-                            <input class="form-control me-2" type="search" name="search" placeholder="Rechercher dans les messages..." aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Chercher</button>
-                          </form>
+                        <form action="{{ route('messages-recherche') }}" method="GET" class="d-flex" role="search"
+                            style="min-width: 350px">
+                            <input class="form-control me-2" type="search" name="search"
+                                placeholder="Rechercher dans les messages..." aria-label="Search">
+                            <button class="btn btn-outline-dark" type="submit">Chercher</button>
+                        </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        
+
                         <!-- Affichage navbar pour les invités non connectés -->
                         @guest
                             @if (Route::has('login'))
@@ -79,12 +81,18 @@
                             <!-- Affichage navbar pour les utilisateurs connectés -->
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle fs-3" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle fs-2 text-dark" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
+
+                                    <img class="img-thumbnail m-2"
+                                        style="object-fit: contain; height: 50px; width: 50px; border-radius: 50%;"
+                                        src="/images/{{ Auth::user()->image }}">
                                     {{ Auth::user()->pseudo }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end fs-4 text-dark bg-warning"
+                                    aria-labelledby="navbarDropdown">
 
                                     {{-- lien vers le user profile --}}
                                     <a class="dropdown-item" href="{{ route('profil', $user = Auth::user()) }}">
@@ -114,8 +122,8 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            
+        <main class="py-4 bg-dark">
+
             {{-- on injecte le code de chaque page du site --}}
             @yield('title')
             @yield('content')

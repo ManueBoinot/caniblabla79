@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 
@@ -106,13 +107,12 @@ class UserController extends Controller
     public function updatePassword(Request $request, User $user)
     {
         $this->validate($request, [ 
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed',
+            'new_password' => ['required','confirmed', Password::min(8)->mixedCase()->numbers()->symbols()]
         ]);
  
         $hashedPassword = $user->password;
         if (Hash::check($request->old_password, $hashedPassword)) {
-            if (Hash::check($request->new_password, $hashedPassword)) {
+            if (!Hash::check($request->new_password, $hashedPassword)) {
 
                 $user->password = Hash::make($request->new_password);
                 $user->save();

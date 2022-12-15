@@ -37,7 +37,7 @@ class CommentaireController extends Controller
         // création du message en base de données
         $commentaire->save();
 
-        return \redirect()->route('home')->with('message', 'le commentaire a bien été sauvegardé');
+        return \redirect()->route('home')->with('message', 'Le commentaire a bien été publié');
     }
 
 // *************************************************************************************************
@@ -75,7 +75,7 @@ class CommentaireController extends Controller
 
         $commentaire->save();
 
-        return redirect()->route('home')->with('message', 'le commentaire a bien été modifié');
+        return redirect()->route('home')->with('message', 'Le commentaire a bien été modifié');
     }
 
 // *************************************************************************************************
@@ -89,7 +89,7 @@ class CommentaireController extends Controller
     {
         $commentaire->delete();
 
-        return redirect()->route('home')->with('message', 'Votre commentaire a bien été supprimé');
+        return redirect()->route('home')->with('message', 'Le commentaire a bien été supprimé');
     }
 
 // *************************************************************************************************

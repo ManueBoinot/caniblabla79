@@ -1,6 +1,6 @@
-    <section class="bg-info container mx-auto my-4 text-center text-white rounded w-75 border">
+    <section class="container mx-auto my-4 text-center bg-warning w-75 border">
         <!-- FORMULAIRE NOUVEAU MESSAGE-->
-        <div class="row gap-5 p-3 mx-auto my-3">
+        <div class="row gap-3 p-3 mx-auto my-3">
 
             <div class="row">
                 <h2 class="text-center text-uppercase">Publier un nouveau message</h2>
@@ -19,7 +19,7 @@
                     <label for="tags" class="form-label fs-5 mt-3">Tags (facultatif)</label>
                     <input name="tags" type="text" class="form-control" id="tags">
 
-                    <button class="btn btn-lg btn-warning mt-3" type="submit"
+                    <button class="btn btn-lg btn-dark mt-3 fw-bold" type="submit"
                         action="{{ route('home', Auth::user()) }}">Je publie !</button>
                 </form>
 

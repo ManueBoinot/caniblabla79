@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <section class="container bg-light text-center mx-auto">
+    <section class="container text-center mx-auto">
         @foreach ($messages as $message)
             {{-- AFFICHAGE DES MESSAGES --}}
-            <div class="card w-75 mx-auto p-3 my-3 bg-warning">
+            <div class="card w-75 mx-auto p-3 my-3 ">
 
                 {{-- MESSAGE IMAGE --}}
                 <img src="/images/{{ $message->image }}" class="card-img-top mx-auto" style="object-fit:contain; max-width: 300px; max-height: 300px;" alt="image">
@@ -17,12 +17,12 @@
                 <div class="card-body p-2 mx-auto">
 
                     {{-- message title --}}
-                    <h5 class="card-title p-2 fw-bold">{{ $message->tags }}</h5>
+                    <h5 class="card-title p-2 fw-bold">#{{ implode(' #', (explode(' ', $message->tags)))}}</h5>
 
                     {{-- message text --}}
                     <div class="card-text">
                         <p class="fst-italic">Posté par <span class="fw-bold">{{ $message->user->pseudo }}</span> le
-                            {{ $message->created_at }}</p>
+                            {{ date_format($message->created_at, 'd-m-Y H:i:s') }}</p>
                         <p>{{ $message->contenu }}</p>
                     </div>
                 </div>

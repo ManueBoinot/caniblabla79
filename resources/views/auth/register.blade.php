@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('S\'incrire') }}</div>
+                <div class="card bg-dark text-warning border-warning">
+                    <div class="card-header border-warning fs-2 text-center">{{ __('S\'inscrire sur CANIBLABLA79') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -104,7 +104,6 @@
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
-
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -116,7 +115,6 @@
                             <div class="row mb-3">
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Confirmez votre mot de passe') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
