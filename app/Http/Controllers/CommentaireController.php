@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Commentaire;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
 
 class CommentaireController extends Controller
 {
@@ -40,7 +40,7 @@ class CommentaireController extends Controller
         return \redirect()->route('home')->with('message', 'Le commentaire a bien été publié');
     }
 
-// *************************************************************************************************
+    // *************************************************************************************************
     /**
      * Show the form for editing the specified resource.
      *
@@ -52,7 +52,7 @@ class CommentaireController extends Controller
         return \view('commentaire.modif-commentaire', ['commentaire' => $commentaire]);
     }
 
-// *************************************************************************************************
+    // *************************************************************************************************
     /**
      * Update the specified resource in storage.
      *
@@ -63,6 +63,11 @@ class CommentaireController extends Controller
     public function update(Request $request, Commentaire $commentaire)
     {
 
+        // RESTRICTION D'ACCES VIA DES GATES (non utilisé car utilisation de POLICIES à la place)
+        // if (! Gate::allows('update-commentaire', $commentaire)) {
+        //     abort(403);
+        // }
+
         $request->validate([
             'contenu' => 'nullable|min:5|max:500',
             'tags' => 'nullable|min:3|max:50',
@@ -71,14 +76,14 @@ class CommentaireController extends Controller
 
         $commentaire->contenu = isset($request['contenu']) ? $request['contenu'] : null;
         $commentaire->image = isset($request['image']) ? uploadImage($request['image']) : "default_user.jpg";
-        $commentaire->tags = isset ($request['tags']) ? $request['tags'] : null;
+        $commentaire->tags = isset($request['tags']) ? $request['tags'] : null;
 
         $commentaire->save();
 
         return redirect()->route('home')->with('message', 'Le commentaire a bien été modifié');
     }
 
-// *************************************************************************************************
+    // *************************************************************************************************
     /**
      * Remove the specified resource from storage.
      *
@@ -92,5 +97,5 @@ class CommentaireController extends Controller
         return redirect()->route('home')->with('message', 'Le commentaire a bien été supprimé');
     }
 
-// *************************************************************************************************
+    // *************************************************************************************************
 }

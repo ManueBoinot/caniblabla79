@@ -12,19 +12,19 @@
         </div>
 
         {{-- On n'affiche les boutons MODIF et SUPPR que pour l'auteur du message --}}
-        @if (Auth::user()->id == $message->user_id)
+        @can('update', $message)
             <div id="boutons-user" class="text-center">
-                <a href="{{ route('message.edit', $message) }}"><button class="btn btn-success m-2"
-                        type="submit">Modifier
+                <a href="{{ route('message.edit', $message) }}"><button class="btn btn-success m-2" type="submit">Modifier
                         mon
                         message</button></a>
-
-                <!-- Button trigger modal MESSAGE -->
-                <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Supprimer mon message
-                </button>
+                @can('delete', $message)
+                    <!-- Button trigger modal MESSAGE -->
+                    <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Supprimer mon message
+                    </button>
+                @endcan
             </div>
-        @endif
+        @endcan
 
         <div class="card m-2 px-5 py-3 rounded-0 text-center bg-dark text-warning border-0">
 

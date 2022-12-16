@@ -3,7 +3,7 @@
 
 {{-- inclusion dynamique du titre --}}
 @section('title')
-    Modifier-infos
+    CANIBLABLA79 - Modifier infos
 @endsection
 
 @section('content')

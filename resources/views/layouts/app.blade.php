@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body class="bg-warning">
     <div class="container-fluid text-center">
         @if (session()->has('message'))
             <p class="alert alert-success">{{ session()->get('message') }}</p>
@@ -39,7 +39,8 @@
             </div>
         @endif
     </div>
-    <div id="app">
+
+    <div class="bg-warning" id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-warning shadow-sm">
             <div class="container">
                 <a class="navbar-brand fs-1 text-white" href="{{ url('/home') }}">
@@ -52,7 +53,8 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- BARRE DE RECHERCHE POUR UTILISATEURS CONNECTÉS UNIQUEMENT -->
+                    @if (Auth::user())
                     <ul class="navbar-nav mx-auto">
                         <form action="{{ route('messages-recherche') }}" method="GET" class="d-flex" role="search"
                             style="min-width: 350px">
@@ -61,6 +63,7 @@
                             <button class="btn btn-outline-dark" type="submit">Chercher</button>
                         </form>
                     </ul>
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -122,13 +125,18 @@
             </div>
         </nav>
 
-        <main class="py-4 bg-dark">
+        <main class="container-fluid py-5 mb-5 bg-dark">
 
             {{-- on injecte le code de chaque page du site --}}
             @yield('title')
             @yield('content')
 
         </main>
+
+        <footer class="container-fluid bg-warning text-dark">
+            <p class="text-center">CANIBLABLA 79 - Tous droits réservés</p>
+        </footer>
+        
     </div>
 </body>
 

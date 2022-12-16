@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-    <h1 class="text-center text-info m-5 fs-1">Bienvenue sur CANIBLABLA79 <span class="fw-bold">{{ Auth::user()->pseudo }}</span> !</h1>
+CANIBLABLA79 - Accueil
 @endsection
 
 @section('content')
     <section class="container">
+
+        <h1 class="text-center text-info m-5 fs-1">Bienvenue sur CANIBLABLA79 <span class="fw-bold">{{ Auth::user()->pseudo }}</span> !</h1>
 
         {{-- POSTER UN MESSAGE --}}
         <section class="mx-auto">

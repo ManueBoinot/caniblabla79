@@ -23,8 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // (non utilisé) on récupère tous les messages
-        // $message = Message::all();
 
         // on récupère tous les messages ET leur auteur ET les commentaires liés
         $messages = Message::with(['user', 'commentaires' => function ($query) {

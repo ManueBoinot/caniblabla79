@@ -3,13 +3,16 @@
 
 {{-- inclusion dynamique du titre --}}
 @section('title')
-    <h1 class="text-center text-uppercase text-info">ESPACE PERSONNEL</h1>
+CANIBLABLA79 - Espace personnel
 @endsection
 
 @section('content')
     {{-- écrire ici le code de cette page --}}
 
     <section class="container mx-auto w-50 text-warning">
+        
+        <h1 class="text-center text-uppercase text-info">ESPACE PERSONNEL</h1>
+
         <div class="row gap-5 p-5">
             <div class="row">
                 <h1 class="text-center text-white fst-italic">Bonjour <span class="fw-bold">{{ $user->pseudo }}</span> !</h1>

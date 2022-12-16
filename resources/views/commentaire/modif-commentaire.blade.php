@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+CANIBLABLA79 - Modifier commentaire
+@endsection
+
 @section('content')
     <section class="container mx-auto p-5">
 

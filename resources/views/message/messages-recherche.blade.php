@@ -1,11 +1,16 @@
 @extends('layouts.app')
 
 @section('title')
-    <h1 class="text-center text-uppercase text-info">RÉSULTAT DE LA RECHERCHE</h1>
+CANIBLABLA79 - Recherche de messages
 @endsection
 
 @section('content')
     <section class="container text-center mx-auto">
+        
+        <h1 class="text-center text-uppercase text-info">RÉSULTAT DE LA RECHERCHE</h1>
+
+        @if(count($messages) > 0)
+
         @foreach ($messages as $message)
             {{-- AFFICHAGE DES MESSAGES --}}
             <div class="card w-75 mx-auto p-3 my-3 ">
@@ -28,6 +33,12 @@
                 </div>
             </div>
         @endforeach
+
+        @else 
+
+        <h2 class="text-center fs-2 m-3 text-warning">Il n'y a aucun résultat pour cette recherche.</h2>
+
+        @endif
 
         {{-- PAGINATION DES MESSAGES --}}
         <div class="d-flex justify-content-center">

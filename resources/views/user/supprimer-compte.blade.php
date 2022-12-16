@@ -3,7 +3,7 @@
 
 {{-- inclusion dynamique du titre --}}
 @section('title')
-    Supprimer-compte
+CANIBLABLA79 - Supprimer compte
 @endsection
 
 @section('content')

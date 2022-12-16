@@ -3,7 +3,7 @@
 <div class="card w-100 mx-auto p-3 mb-2 bg-dark border border-info rounded-0 rounded-bottom text-info text-center">
 
     <div class="d-flex justify-content-center">
-        <a href="/user/profil/{{ $commentaire->user->id}}"><img class="img-thumbnail me-2 my-auto"
+        <a href="/user/profil/{{ $commentaire->user->id }}"><img class="img-thumbnail me-2 my-auto"
                 style="object-fit: contain; height: 50px; width: 50px; border-radius: 50%;"
                 src="/images/{{ $commentaire->user->image }}" alt="avatar de {{ $commentaire->user->pseudo }}"></a>
         <p class="fst-italic my-auto">Commentaire de <span class="fw-bold">{{ $commentaire->user->pseudo }}</span>
@@ -25,17 +25,21 @@
         <div class="card-text mx-auto">
             <p>{{ $commentaire->contenu }}</p>
         </div>
-        {{-- On n'affiche les boutons MODIF et SUPPR que pour l'auteur du commentaire --}}
-        @if (Auth::user()->id == $commentaire->user_id)
-            <a href="{{ route('commentaire.edit', $commentaire) }}"><button class="btn btn-success"
-                    type="submit">Modifier</button></a>
-
-            <!-- Button trigger modal COMMENTAIRE -->
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                data-bs-target="#modalCommentaire{{ $message->id }}">
-                Supprimer
-            </button>
-        @endif
+        {{-- On n'affiche les boutons MODIF et SUPPR que pour l'auteur du message --}}
+        @can('update', $commentaire)
+            <div id="boutons-user" class="text-center">
+                <a href="{{ route('commentaire.edit', $commentaire) }}"><button class="btn btn-success m-2"
+                        type="submit">Modifier
+                        mon
+                        commentaire</button></a>
+                @can('delete', $commentaire)
+                    <!-- Button trigger modal MESSAGE -->
+                    <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Supprimer mon commentaire
+                    </button>
+                @endcan
+            </div>
+        @endcan
     </div>
 </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,6 @@ Route::PATCH('/message/update/{message}', [App\Http\Controllers\MessageControlle
 Route::PATCH('/commentaire/update/{commentaire}', [App\Http\Controllers\CommentaireController::class, 'update'])->name('commentaire.update');
 // exécution de RECHERCHE MESSAGES
 Route::get('/user/messages-recherche', [App\Http\Controllers\MessageController::class,'index'])->name('messages-recherche');
-
 
 // passerelles entre utilisateur et controllers
 Route::resource('/user', App\Http\Controllers\UserController::class)->except(['index', 'create', 'store']);

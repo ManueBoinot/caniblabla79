@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
 
-        // Création de 20 users aléatoires avec la factory
+        // Création de 20 profils aléatoires avec la factory
         \App\Models\User::factory(20)->create();
     }
 }
