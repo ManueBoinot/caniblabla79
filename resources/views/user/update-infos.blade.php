@@ -19,7 +19,7 @@
                     @method('put') @csrf
                     <div class="my-2">
                         <label for="inputImage" class="form-label fw-bold fs-5">Nouvel avatar</label>
-                        <input name="inputImage" type="file" class="form-control text-secondary" id="inputImage"
+                        <input name="image" type="file" class="form-control text-secondary" id="inputImage"
                             value="{{ $user->image }}">
                     </div>
                     <div class="my-2">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="my-2">
                         <button class="btn btn-lg btn-success m-2" type="submit"
-                            action="{{ route('user.update', Auth::user()) }}">Modifier mes
+                           >Modifier mes
                             informations</button>
                     </div>
                 </form>

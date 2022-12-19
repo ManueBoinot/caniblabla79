@@ -34,7 +34,7 @@
                         commentaire</button></a>
                 @can('delete', $commentaire)
                     <!-- Button trigger modal MESSAGE -->
-                    <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#modalCommentaire{{ $commentaire->id }}">
                         Supprimer mon commentaire
                     </button>
                 @endcan
@@ -44,7 +44,7 @@
 </div>
 
 <!-- Modal COMMENTAIRE-->
-<div class="modal modal-lg fade" id="modalCommentaire{{ $message->id }}" tabindex="-1"
+<div class="modal modal-lg fade" id="modalCommentaire{{ $commentaire->id }}" tabindex="-1"
     aria-labelledby="modalCommentaireLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

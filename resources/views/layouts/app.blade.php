@@ -44,7 +44,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-warning shadow-sm">
             <div class="container">
                 <a class="navbar-brand fs-1 text-white" href="{{ url('/home') }}">
-                    {{ config('CANIBLABLA 79', 'CANIBLABLA 79') }}
+                    CANIBLABLA 79
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

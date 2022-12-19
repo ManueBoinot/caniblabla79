@@ -37,6 +37,7 @@ class UserController extends Controller
     {
         // on renvoie la vue COMPTE en injectant la variable $user
         // ['nom variable dans la vue' => $variable à injecter]
+        $this->authorize('update', $user);
         return view('user.compte', ['user' => $user]);
     }
 
@@ -50,6 +51,7 @@ class UserController extends Controller
      */
     public function modifierInfos(User $user)
     {
+        $this->authorize('update', $user);
         return view('user.update-infos', ['user' => $user]);
     }
 
@@ -77,6 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
 
         $request->validate([
             'nom' => 'required|string|min:2|max:50',
@@ -109,6 +112,8 @@ class UserController extends Controller
     public function updatePassword(Request $request, User $user)
     {
 
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'new_password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()]
         ]);
@@ -140,6 +145,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
         $user->delete();
 
         return redirect()->route('home')->with('flash', 'Votre compte a bien été supprimé');
